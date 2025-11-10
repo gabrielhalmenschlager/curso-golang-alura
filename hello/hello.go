@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"net/http"
 	"os"
@@ -111,12 +112,21 @@ func leSitesDoArq() []string {
 
 	var sites []string
 
-	arquivo, err := os.Open("sites.txt")
-	fmt.Println(arquivo)
+	arquivo, err := os.Open("hello/sites.txt")
+	// arquivo, err := ioutil.ReadFile("hello/sites.txt")
 
 	if err != nil {
 		fmt.Println(Red, "⚠️ Ocorreu um erro", err, Reset)
 	}
+
+	leitor := bufio.NewReader(arquivo)
+	linha, err := leitor.ReadString('\n')
+
+	if err != nil {
+		fmt.Println(Red, "⚠️ Ocorreu um erro", err, Reset)
+	}
+
+	fmt.Println(linha)
 
 	return sites
 }
