@@ -4,7 +4,11 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 )
+
+const monitoramentos = 3
+const delay = 3
 
 func main() {
 
@@ -49,12 +53,14 @@ func lerComando() int {
 	fmt.Scan(&comandoLido)
 	fmt.Println("O endereço da minhha variável comando é", &comandoLido)
 	fmt.Println("O comando escolhido foi", comandoLido)
+	fmt.Println("")
 
 	return comandoLido
 }
 
 func iniciarMonitoramento() {
 	fmt.Println("Monitoramento...")
+	fmt.Println("")
 
 	sites := [4]string{
 		"https://www.alura.com.br",
@@ -63,10 +69,20 @@ func iniciarMonitoramento() {
 		"https://www.udemy.com",
 	}
 
-	for i := 0; i < len(sites); i++ {
-		fmt.Println(sites[i])
+	for i := 0; i < monitoramentos; i++ {
+		for i, site := range sites {
+			fmt.Println("Testando site", i+1, ":", site)
+			testaSite(site)
+		}
+		time.Sleep(delay * time.Second)
+		fmt.Println("")
+
 	}
 
+	fmt.Println("")
+}
+
+func testaSite(site string) {
 	resp, _ := http.Get(site)
 
 	if resp.StatusCode == 200 {
@@ -74,5 +90,4 @@ func iniciarMonitoramento() {
 	} else {
 		fmt.Println("Site:", site, "está com problemas. Status Code:", resp.StatusCode)
 	}
-
 }
