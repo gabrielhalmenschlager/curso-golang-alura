@@ -55,7 +55,14 @@ func lerComando() int {
 
 func iniciarMonitoramento() {
 	fmt.Println("Monitoramento...")
-	site := "https://www.alura.com.br/"
+
+	sites := [4]string{
+		"https://www.alura.com.br",
+		"https://www.google.com",
+		"https://www.github.com",
+		"https://www.udemy.com",
+	}
+
 	resp, _ := http.Get(site)
 
 	if resp.StatusCode == 200 {
