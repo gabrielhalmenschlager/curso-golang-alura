@@ -94,7 +94,11 @@ func iniciarMonitoramento() {
 }
 
 func testaSite(site string) {
-	resp, _ := http.Get(site)
+	resp, err := http.Get(site)
+
+	if err != nil {
+		fmt.Println(Red, "⚠️ Ocorreu um erro", err, Reset)
+	}
 
 	if resp.StatusCode == 200 {
 		fmt.Println(Green, "✔️  Site:", site, "foi carregado com sucesso!", Reset)
@@ -107,8 +111,12 @@ func leSitesDoArq() []string {
 
 	var sites []string
 
-	arquivo, _ := os.Open("sites.txt")
+	arquivo, err := os.Open("sites.txt")
 	fmt.Println(arquivo)
+
+	if err != nil {
+		fmt.Println(Red, "⚠️ Ocorreu um erro", err, Reset)
+	}
 
 	return sites
 }
