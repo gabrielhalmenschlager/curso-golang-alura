@@ -1,4 +1,6 @@
-https://www.alura.com.br
 https://www.google.com
 https://www.github.com
+https://www.alura.com.br
 https://www.udemy.com
+https://www.fiap.com.br
+https://www.senacrs.com.br

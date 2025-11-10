@@ -3,8 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
+	"strings"
 )
 
 // Cores ANSI para o terminal
@@ -114,19 +116,19 @@ func leSitesDoArq() []string {
 
 	arquivo, err := os.Open("hello/sites.txt")
 	// arquivo, err := ioutil.ReadFile("hello/sites.txt")
-
 	if err != nil {
 		fmt.Println(Red, "⚠️ Ocorreu um erro", err, Reset)
 	}
 
 	leitor := bufio.NewReader(arquivo)
-	linha, err := leitor.ReadString('\n')
-
-	if err != nil {
-		fmt.Println(Red, "⚠️ Ocorreu um erro", err, Reset)
+	for {
+		linha, err := leitor.ReadString('\n')
+		linha = strings.TrimSpace(linha)
+		sites = append(sites, linha)
+		if err == io.EOF {
+			break
+		}
 	}
-
-	fmt.Println(linha)
-
+	arquivo.Close()
 	return sites
 }
