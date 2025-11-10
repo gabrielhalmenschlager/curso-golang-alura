@@ -4,63 +4,76 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"time"
 )
 
-const monitoramentos = 3
-const delay = 3
+// Cores ANSI para o terminal
+var Reset = "\033[0m"
+var Red = "\033[31m"
+var Green = "\033[32m"
+var Yellow = "\033[33m"
+var Blue = "\033[34m"
+var Magenta = "\033[35m"
+var Cyan = "\033[36m"
+var Gray = "\033[37m"
+var White = "\033[97m"
 
 func main() {
-
 	exibeIntroducao()
 
 	for {
 		exibeMenu()
-
 		comando := lerComando()
 
 		switch comando {
 		case 1:
 			iniciarMonitoramento()
 		case 2:
-			fmt.Println("Exibindo Logs...")
+			fmt.Println(Yellow + "\n📜 Exibindo Logs..." + Reset)
 		case 0:
-			fmt.Println("Saindo do Programa...")
+			fmt.Println(Red + "\nSaindo do Programa..." + Reset)
 			os.Exit(0)
 		default:
-			fmt.Println("Não conheço este comando!")
+			fmt.Println(Red + "\n❌ Não conheço este comando!" + Reset)
 			os.Exit(-1)
 		}
 	}
-
 }
 
 func exibeIntroducao() {
 	nome := "Gabriel"
 	versao := 1.1
-	fmt.Println("Olá, sr.", nome)
-	fmt.Println("Este programa está na versão", versao)
+
+	fmt.Println(Cyan + "=====================================" + Reset)
+	fmt.Println(Magenta + "      🖥️  Monitor de Sites v1.1" + Reset)
+	fmt.Println(Cyan + "=====================================" + Reset)
+	fmt.Println("Olá, sr.", Green+nome+Reset)
+	fmt.Println("Versão do programa:", Yellow, versao, Reset)
+	fmt.Println()
 }
 
 func exibeMenu() {
-	fmt.Println("1 - Iniciar Monitoramento")
-	fmt.Println("2 - Exibir Logs")
-	fmt.Println("0 - Sair do Programa")
+	fmt.Println(Blue + "=======================" + Reset)
+	fmt.Println(White + "      MENU PRINCIPAL" + Reset)
+	fmt.Println(Blue + "=======================" + Reset)
+	fmt.Println(Cyan + "1" + Reset + " - Iniciar Monitoramento")
+	fmt.Println(Cyan + "2" + Reset + " - Exibir Logs")
+	fmt.Println(Cyan + "0" + Reset + " - Sair do Programa")
+	fmt.Println()
 }
 
 func lerComando() int {
 	var comandoLido int
+	fmt.Print(Yellow + "Digite o comando desejado: " + Reset)
 	fmt.Scan(&comandoLido)
-	fmt.Println("O endereço da minhha variável comando é", &comandoLido)
-	fmt.Println("O comando escolhido foi", comandoLido)
-	fmt.Println("")
-
+	fmt.Println(Gray, "O endereço da minha variável comando é", &comandoLido, Reset)
+	fmt.Println(Green, "O comando escolhido foi", comandoLido, Reset)
+	fmt.Println()
 	return comandoLido
 }
 
 func iniciarMonitoramento() {
-	fmt.Println("Monitoramento...")
-	fmt.Println("")
+	fmt.Println(Magenta + "\n🚀 Iniciando monitoramento..." + Reset)
+	fmt.Println(Cyan + "---------------------------------" + Reset)
 
 	sites := [4]string{
 		"https://www.alura.com.br",
@@ -69,25 +82,21 @@ func iniciarMonitoramento() {
 		"https://www.udemy.com",
 	}
 
-	for i := 0; i < monitoramentos; i++ {
-		for i, site := range sites {
-			fmt.Println("Testando site", i+1, ":", site)
-			testaSite(site)
-		}
-		time.Sleep(delay * time.Second)
-		fmt.Println("")
-
+	for i, site := range sites {
+		fmt.Println(Blue, "\nTestando site", i+1, ":", site, Reset)
+		testaSite(site)
 	}
 
-	fmt.Println("")
+	fmt.Println(Cyan + "\n---------------------------------" + Reset)
+	fmt.Println(Green + "✅ Monitoramento finalizado!\n" + Reset)
 }
 
 func testaSite(site string) {
 	resp, _ := http.Get(site)
 
 	if resp.StatusCode == 200 {
-		fmt.Println("Site:", site, "foi carregado com sucesso!")
+		fmt.Println(Green, "✔️  Site:", site, "foi carregado com sucesso!", Reset)
 	} else {
-		fmt.Println("Site:", site, "está com problemas. Status Code:", resp.StatusCode)
+		fmt.Println(Red, "⚠️  Site:", site, "está com problemas. Status Code:", resp.StatusCode, Reset)
 	}
 }
