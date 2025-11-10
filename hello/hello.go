@@ -63,6 +63,10 @@ func iniciarMonitoramento() {
 		"https://www.udemy.com",
 	}
 
+	for i := 0; i < len(sites); i++ {
+		fmt.Println(sites[i])
+	}
+
 	resp, _ := http.Get(site)
 
 	if resp.StatusCode == 200 {
