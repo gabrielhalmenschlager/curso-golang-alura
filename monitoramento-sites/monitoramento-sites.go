@@ -118,7 +118,7 @@ func leSitesDoArq() []string {
 
 	var sites []string
 
-	arquivo, err := os.Open("hello/sites.txt")
+	arquivo, err := os.Open("monitoramento-sites/sites.txt")
 	// arquivo, err := ioutil.ReadFile("hello/sites.txt")
 	if err != nil {
 		fmt.Println(Red, "⚠️ Ocorreu um erro", err, Reset)
@@ -138,7 +138,7 @@ func leSitesDoArq() []string {
 }
 
 func registraLog(site string, status bool) {
-	arquivo, err := os.OpenFile("hello/log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	arquivo, err := os.OpenFile("monitoramento-sites/log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		fmt.Println(Red, "⚠️ Ocorreu um erro", err, Reset)
 	}
@@ -152,7 +152,7 @@ func registraLog(site string, status bool) {
 }
 
 func imprimeLogs() {
-	arquivo, err := ioutil.ReadFile("hello/log.txt")
+	arquivo, err := ioutil.ReadFile("monitoramento-sites/log.txt")
 	if err != nil {
 		fmt.Println(Red, "⚠️ Ocorreu um erro", err, Reset)
 	}
