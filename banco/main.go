@@ -17,15 +17,15 @@ func main() {
 		saldo:         125.50,
 	}
 
-	contaDaBruna := ContaCorrente{"Bruna", 172, 654321, 150.50}
-
 	fmt.Println(contaDoGabriel)
-	fmt.Println(contaDaBruna)
 
-	var contaDaCris *ContaCorrente
-	contaDaCris = new(ContaCorrente)
-	contaDaCris.titular = "Cris"
-	contaDaCris.saldo = 500
+	// contaDaBruna := ContaCorrente{"Bruna", 172, 654321, 150.50}
+	// fmt.Println(contaDaBruna)
 
-	fmt.Println(*contaDaCris)
+	// var contaDaCris *ContaCorrente
+	// contaDaCris = new(ContaCorrente)
+	// contaDaCris.titular = "Cris"
+	// contaDaCris.saldo = 500
+
+	// fmt.Println(*contaDaCris)
 }
