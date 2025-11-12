@@ -18,7 +18,6 @@ func main() {
 		Titular:       clienteGabriel,
 		NumeroAgencia: 589,
 		NumeroConta:   123456,
-		Saldo:         500,
 	}
 
 	contaDoPedro := contas.ContaCorrente{
@@ -29,7 +28,6 @@ func main() {
 		},
 		NumeroAgencia: 172,
 		NumeroConta:   654321,
-		Saldo:         700,
 	}
 
 	fmt.Println(contaDoGabriel)
