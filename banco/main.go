@@ -20,7 +20,7 @@ func main() {
 		NumeroConta:   123456,
 	}
 
-	contaDoPedro := contas.ContaCorrente{
+	contaDoPedro := contas.ContaPoupanca{
 		Titular: clientes.Titular{
 			Nome:      "Pedro",
 			CPF:       "321.333.222.111.32",
