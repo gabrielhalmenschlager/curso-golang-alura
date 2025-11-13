@@ -1,41 +1,72 @@
 {{define "_menu"}}
 
 <nav class="navbar navbar-expand-lg shadow-sm mb-4"
-     style="background: linear-gradient(90deg, #0f1423, #12192c); border-bottom: 1px solid #1a2138;">
+     style="background-color: #0f1423; border-bottom: 1px solid #1a2138;">
   <div class="container">
-    <a class="navbar-brand fw-bold"
+
+    <!-- Logo e Nome -->
+    <a class="navbar-brand d-flex align-items-center fw-bold"
        href="/"
-       style="color: #4fc3f7; font-size: 1.5rem; letter-spacing: 1px; text-transform: uppercase; transition: 0.3s;">
-      <i class="fas fa-store me-2"></i>Alura Loja
+       style="color: #4fc3f7; font-size: 1.5rem; letter-spacing: 0.5px; transition: 0.3s; gap: 0.6rem;">
+      <img src="https://cdn-icons-png.flaticon.com/512/869/869636.png"
+           alt="Logo"
+           width="36" height="36"
+           class="me-2"
+           style="filter: drop-shadow(0 0 4px #4fc3f7);">
+      <span style="text-transform: none;">Alura Loja</span>
     </a>
 
+    <!-- Botão responsivo -->
     <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarNav" aria-controls="navbarNav"
             aria-expanded="false" aria-label="Toggle navigation"
-            style="border: none;">
-      <span class="navbar-toggler-icon"></span>
+            style="border: none; color: #4fc3f7;">
+      <i class="bi bi-list" style="font-size: 1.8rem;"></i>
     </button>
 
+    <!-- Itens do menu -->
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="/" 
-             style="color: #a1b3c5; font-weight: 500; transition: 0.3s;">
-             <i class="fas fa-home me-1"></i>Início
+      <ul class="navbar-nav align-items-center" style="gap: 1.8rem;">
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="/"
+             style="color: #a1b3c5; font-weight: 500; transition: 0.3s; gap: 0.4rem;">
+             <i class="bi bi-house-door" style="font-size: 1.1rem;"></i>
+             <span>Início</span>
           </a>
         </li>
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="/new"
-             style="color: #a1b3c5; font-weight: 500; transition: 0.3s;">
-             <i class="fas fa-plus-circle me-1"></i>Novo Produto
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="/new"
+             style="color: #a1b3c5; font-weight: 500; transition: 0.3s; gap: 0.4rem;">
+             <i class="bi bi-plus-circle" style="font-size: 1.1rem;"></i>
+             <span>Novo Produto</span>
           </a>
         </li>
       </ul>
     </div>
+
   </div>
 </nav>
 
 <style>
+  .nav-link {
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #4fc3f7;
+    transition: width 0.3s ease-in-out;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
   .nav-link:hover {
     color: #4fc3f7 !important;
     transform: translateY(-1px);
@@ -43,11 +74,26 @@
 
   .navbar-brand:hover {
     color: #80deea !important;
-    text-shadow: 0 0 10px #4fc3f7;
+    transform: translateY(-1px);
+  }
+
+  .navbar {
+    animation: fadeDown 0.7s ease-in-out;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .navbar-brand span {
+      font-size: 1.25rem;
+    }
   }
 </style>
 
-<!-- Ícones (Font Awesome) -->
-<script src="https://kit.fontawesome.com/a2d04b6d6a.js" crossorigin="anonymous"></script>
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
 {{end}}
