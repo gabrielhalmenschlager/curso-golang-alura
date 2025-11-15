@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/gabrielhalmenschlager/curso-golang-alura/api-go-rest/database"
 	"github.com/gabrielhalmenschlager/curso-golang-alura/api-go-rest/models"
 	"github.com/gorilla/mux"
 )
@@ -15,7 +16,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func TodasPersonalidades(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(models.Personalidades)
+	var p []models.Personalidade
+	database.DB.Find(&p)
+	json.NewEncoder(w).Encode(p)
 }
 
 func RetornaUmaPersonalidade(w http.ResponseWriter, r *http.Request) {
