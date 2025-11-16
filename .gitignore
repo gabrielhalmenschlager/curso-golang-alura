@@ -1,0 +1,2 @@
+# Ignore volume do Postgres
+postgres-data/
