@@ -3,8 +3,8 @@
   margin: 20px auto;
   padding: 25px;
   border-radius: 12px;
-  max-width: 800px; /* Card mais largo */
-  background-color: #2c313a; /* Cor de fundo combinando com o header */
+  max-width: 800px;
+  background-color: #2c313a;
   color: #ffffff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -18,7 +18,7 @@
 h3 {
   margin: 0 0 10px 0;
   font-size: 24px;
-  color: #61dafb; /* Azul do React */
+  color: #61dafb;
   font-weight: bold;
 }
 
