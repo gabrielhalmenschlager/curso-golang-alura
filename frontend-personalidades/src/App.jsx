@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import logo from './assets/logo.svg';
 import logogo from './assets/logo-go.png';
