@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+/* --- GERAL --- */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -20,7 +21,7 @@ body {
     width: 100%;
     max-width: 900px;
     min-height: 700px;
-    background: #cc0000; 
+    background: #cc0000;
     border: 5px solid #333;
     border-radius: 10px 10px 40px 10px;
     padding: 25px;
@@ -30,7 +31,7 @@ body {
 }
 
 .pokedex-screen {
-    background: #98d8a8; 
+    background: #98d8a8;
     border: 6px solid #333;
     border-radius: 8px;
     padding: 20px;
@@ -69,6 +70,7 @@ body {
     padding: 2rem;
 }
 
+/* --- GRID E CARDS --- */
 .list-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -84,7 +86,7 @@ body {
     box-shadow: 3px 3px 0px #888;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     image-rendering: pixelated;
-
+    /* Essencial para o layout flexível */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -103,7 +105,7 @@ body {
     border-radius: 5px;
     border: 2px solid #aaa;
     margin-bottom: 0.5rem;
-    align-self: center; 
+    align-self: center;
 }
 
 .pokemon-card h3 {
@@ -127,9 +129,17 @@ body {
     color: white;
     border: 2px solid rgba(0, 0, 0, 0.2);
     text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-    align-self: center; 
+    align-self: center;
 }
 
+/* --- WRAPPER DE AÇÕES (CORREÇÃO DE LAYOUT CRUCIAL) --- */
+.card-actions-wrapper {
+    /* Esta regra é crucial: empurra o bloco de botões para a base do card */
+    margin-top: auto; 
+    width: 100%;
+}
+
+/* --- BOTÕES GERAIS --- */
 .btn {
     padding: 0.5rem 0.8rem;
     border: 2px solid #333;
@@ -140,8 +150,8 @@ body {
     box-shadow: 2px 2px 0px #555;
     transition: all 0.1s ease;
     width: 100%;
-    margin-top: 5px; 
-    text-decoration: none; 
+    margin-top: 5px; /* Espaço entre os botões dentro do wrapper */
+    text-decoration: none;
     text-align: center;
     line-height: 1.5;
 }
@@ -161,12 +171,35 @@ body {
     color: white;
 }
 
-.submit-btn {
-    background: #4caf50;
-    color: white;
-    width: 100%;
+/* --- BOTÕES DE EDIÇÃO/DELEÇÃO --- */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  margin-top: 5px; 
 }
 
+.action-buttons .btn {
+  flex-grow: 1;
+  /* AJUSTE MAIS AGRESSIVO NA FONTE: DEIXA O TEXTO CABER */
+  font-size: 0.6rem; 
+  /* AJUSTE NO PADDING: Mínimo horizontal para não transbordar */
+  padding: 0.4rem 0.1rem; 
+  margin-top: 0; 
+  /* white-space: nowrap não é usado, permitindo que o flexbox ajuste */
+}
+
+.edit-btn {
+    background: #007bff;
+    color: white;
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+}
+
+/* --- FORMULÁRIO --- */
 .form-container {
     max-width: 500px;
     margin: 0 auto;
@@ -200,7 +233,7 @@ body {
     border: 2px solid #333;
     border-radius: 4px;
     background: #f0f0f0;
-    color: #333;
+    color: #333; /* Corrigido para preto */
 }
 
 .form-group input:focus {
@@ -209,27 +242,138 @@ body {
     box-shadow: 0 0 5px #ffd700;
 }
 
-.action-buttons {
+/* --- NAVEGAÇÃO POKÉDEX --- */
+.pokedex-nav {
+    background: #a00000;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
-    gap: 5px;
-    margin-top: 10px;
+    align-items: center;
+    border: 3px solid #333;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
-.action-buttons .btn {
-    flex-grow: 1;
-    font-size: 0.7rem; 
-    padding: 0.4rem; 
-    margin-top: 0; 
-    white-space: nowrap; 
+.pokedex-nav-lights {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* AJUSTE: Maior espaçamento entre as luzes */
 }
 
-.edit-btn {
-    background: #007bff;
-    color: white;
+.light {
+    border-radius: 50%;
+    border: 2px solid #333;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-.delete-btn {
-    background: #dc3545;
-    color: white;
+.big-light-blue {
+    width: 45px;
+    height: 45px;
+    background: #3a98ff;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px #fff, inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.small-light-red { width: 15px; height: 15px; background: #ff1f1f; }
+.small-light-yellow { width: 15px; height: 15px; background: #f8d030; }
+.small-light-green { width: 15px; height: 15px; background: #78c850; }
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-link {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: #f0f0f0;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    text-shadow: 1px 1px #333;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+    background: #f0f0f0;
+    color: #a00000;
+    border-color: #333;
+    text-shadow: none;
+    box-shadow: 2px 2px 0px #333;
+}
+
+/* --- MODAL POKÉDEX STYLE --- */
+
+/* Fundo escuro que cobre toda a tela */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Deixei o fundo mais escuro, quase preto, para destacar o modal */
+    background: rgba(0, 0, 0, 0.9); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Corpo do Modal (A TELA) */
+.pokedex-style-modal {
+    /* Cor de fundo que simula o verde do console Game Boy/Pokédex */
+    background: #98d8a8; 
+    color: #333;
+    padding: 2.5rem 2rem; /* Aumenta o padding vertical para dar mais ar */
+    border: 5px solid #333;
+    /* Borda interna (inset) para dar profundidade de tela */
+    box-shadow: 
+        8px 8px 0px rgba(0, 0, 0, 0.7), /* Sombra pesada externa */
+        inset 0 0 15px rgba(0, 0, 0, 0.4); /* Efeito de profundidade na tela */
+    border-radius: 10px;
+    max-width: 420px;
+    width: 90%;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    /* Borda secundária (inner border) */
+    outline: 2px solid #555; 
+    outline-offset: -5px; 
+}
+
+/* Título */
+.modal-title {
+    font-size: 1.1rem; /* Um pouco maior */
+    color: #ff0000; /* Vermelho forte para o alerta */
+    margin-bottom: 1.2rem;
+    /* Sombra do texto mais dramática */
+    text-shadow: 2px 2px #333; 
+}
+
+/* Texto da Mensagem */
+.modal-text {
+    font-size: 0.75rem; /* Um pouco maior para facilitar a leitura */
+    margin-bottom: 1.8rem; /* Mais espaço antes dos botões */
+    line-height: 1.5;
+    color: #000; /* Texto principal em preto */
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px; /* Aumenta o gap para separar bem os botões */
+    justify-content: center;
+}
+
+/* Adaptação dos botões existentes para o modal */
+.modal-actions .btn {
+    flex-grow: 0; /* Permite que o botão se ajuste ao seu conteúdo (max-width) */
+    width: 45%; /* Define uma largura máxima para o botão no modal */
+    font-size: 0.65rem;
+    padding: 0.6rem 0.5rem; /* Mais padding vertical */
+    margin-top: 0;
 }

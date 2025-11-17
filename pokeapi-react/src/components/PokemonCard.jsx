@@ -1,3 +1,5 @@
+// src/components/PokemonCard.jsx (Nenhuma mudança necessária neste arquivo)
+
 import { Link } from 'react-router-dom';
 
 function PokemonCard({ id, name, type, image_url, onFavorite, onRemove, onDelete, isFavorited, showAdminActions = false }) { 
@@ -27,26 +29,29 @@ function PokemonCard({ id, name, type, image_url, onFavorite, onRemove, onDelete
           {type}
         </span>
         
-        {isFavorited ? (
-          <button className="btn remove-btn" onClick={() => onRemove(id)}>
-            Desfavoritar
-          </button>
-        ) : (
-          <button className="btn favorite-btn" onClick={() => onFavorite(id)}>
-            Favoritar
-          </button>
-        )}
+        <div className="card-actions-wrapper"> 
+            
+            {isFavorited ? (
+              <button className="btn remove-btn" onClick={() => onRemove(id)}>
+                Desfavoritar
+              </button>
+            ) : (
+              <button className="btn favorite-btn" onClick={() => onFavorite(id)}>
+                Favoritar
+              </button>
+            )}
 
-        {showAdminActions && (
-          <div className="action-buttons">
-            <Link to={`/editar/${id}`} className="btn edit-btn">
-              Editar
-            </Link>
-            <button className="btn delete-btn" onClick={() => onDelete(id)}>
-              Deletar
-            </button>
-          </div>
-        )}
+            {showAdminActions && (
+              <div className="action-buttons">
+                <Link to={`/editar/${id}`} className="btn edit-btn">
+                  Editar
+                </Link>
+                <button className="btn delete-btn" onClick={() => onDelete(id)}>
+                  Deletar
+                </button>
+              </div>
+            )}
+        </div>
       </div>
     );
 }
