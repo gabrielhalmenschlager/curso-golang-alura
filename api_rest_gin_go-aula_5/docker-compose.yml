@@ -14,11 +14,9 @@ services:
   pgadmin-compose:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: "gui@alura.com"
+      PGADMIN_DEFAULT_EMAIL: "gabrielh2007.scs@gmail.com"
       PGADMIN_DEFAULT_PASSWORD: "123456"
     ports:
       - "54321:80"
     depends_on:
       - postgres
-
-

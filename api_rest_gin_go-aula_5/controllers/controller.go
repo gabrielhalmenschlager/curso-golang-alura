@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/gabrielhalmenschlager/curso-golang-alura/api-go-rest/database"
-	"github.com/gabrielhalmenschlager/curso-golang-alura/gin-api-rest/models"
+	"github.com/gabrielhalmenschlager/curso-golang-alura/api_rest_gin_go-aula_5/database"
+	"github.com/gabrielhalmenschlager/curso-golang-alura/api_rest_gin_go-aula_5/models"
 	"github.com/gin-gonic/gin"
 )
 
