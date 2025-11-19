@@ -3,9 +3,9 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/gabrielhalmenschlager/curso-golang-alura/api-go-rest/database"
+	"github.com/gabrielhalmenschlager/curso-golang-alura/gin-api-rest/models"
 	"github.com/gin-gonic/gin"
-	"github.com/guilhermeonrails/api-go-gin/database"
-	"github.com/guilhermeonrails/api-go-gin/models"
 )
 
 func ExibeTodosAlunos(c *gin.Context) {

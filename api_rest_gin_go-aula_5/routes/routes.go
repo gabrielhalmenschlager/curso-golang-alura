@@ -1,8 +1,8 @@
 package routes
 
 import (
+	"github.com/gabrielhalmenschlager/curso-golang-alura/api_rest_gin_go-aula_5/controllers"
 	"github.com/gin-gonic/gin"
-	"github.com/guilhermeonrails/api-go-gin/controllers"
 )
 
 func HandleRequests() {
