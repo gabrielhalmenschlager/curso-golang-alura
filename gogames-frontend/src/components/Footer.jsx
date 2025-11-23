@@ -7,16 +7,16 @@ const Footer = () => {
     <footer className="neon-footer">
       <div className="footer-content">
         <p>
-          &copy; 2024 **GoGames API**. Todos os direitos reservados.
+          &copy; 2025 GoGames API. Todos os direitos reservados.
         </p>
         
         <div className="social-links">
           <span className="developed-by">
-            Desenvolvido com <span className="neon-heart">❤️</span> e Go & React
+            Desenvolvido com Go e React
           </span>
 
           <a 
-            href="https://linkedin.com/in/seu-perfil" 
+            href="https://www.linkedin.com/in/gabriel-halmenschlager/" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="neon-link-footer"
@@ -24,7 +24,7 @@ const Footer = () => {
             <Linkedin size={20} /> 
           </a>
           <a 
-            href="https://github.com/seu-usuario" 
+            href="https://github.com/gabrielhalmenschlager" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="neon-link-footer"

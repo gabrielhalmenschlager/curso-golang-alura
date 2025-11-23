@@ -19,6 +19,4 @@ type Jogo struct {
 	DataCadastro time.Time `json:"data_cadastro" gorm:"autoCreateTime"`
 
 	ImagemURL string `json:"imagem_url"`
-
-	Alugueis []Aluguel `json:"alugueis"`
 }
