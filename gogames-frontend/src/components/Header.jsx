@@ -1,4 +1,3 @@
-// src/components/Header.jsx (Sem mudanças significativas, já está ótimo!)
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Header.css'; 
@@ -6,7 +5,6 @@ import '../styles/Header.css';
 const Header = () => {
   return (
     <header className="neon-header">
-      {/* Classe única 'logo' para estilização */}
       <Link to="/" className="logo"> 
         <span className="neon-text-pink">GO</span>
         <span className="neon-text-cyan">GAMES</span>
@@ -14,7 +12,6 @@ const Header = () => {
       <nav className="nav-links">
         <Link to="/" className="nav-item neon-link">JOGOS</Link>
         <Link to="/alugueis" className="nav-item neon-link">ALUGUÉIS</Link>
-        {/* Botão com classe limpa e direcionada */}
         <Link to="/jogos/novo" className="nav-item neon-link **neon-button**">NOVO JOGO</Link> 
       </nav>
     </header>

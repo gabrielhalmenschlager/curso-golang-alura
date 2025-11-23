@@ -1,7 +1,9 @@
 /* src/styles/global.css */
 @import url('https://fonts.googleapis.com/css2?family=VT323&family=Orbitron:wght@400;700&display=swap');
 
-/* --- Variáveis de Cores e Fontes --- */
+/* =======================================================================
+   1. VARIÁVEIS DE CORES E FONTES (Aprimoradas)
+   ======================================================================= */
 :root {
     /* Fundo */
     --color-bg-dark: #0a011a; 
@@ -10,31 +12,36 @@
     /* Neon Cores */
     --color-neon-pink: #ff00ff;
     --color-neon-cyan: #00ffff;
-    --color-neon-green: #39FF14; /* Ajustado para um verde mais 'ácido/neon' */
-    --color-neon-red: #ff3366; /* Renomeado para consistência */
+    --color-neon-green: #39FF14;
+    --color-neon-red: #ff3366;
 
     /* Texto */
-    --color-text-light: #e0e0e0; 
+    --color-text-light: #f0f0f0; /* Branco ligeiramente off-white */
     --color-text-medium: #a0a0a0; 
+    --color-text-darker: #666; /* Novo: Para texto terciário */
     
     /* Tipografia */
     --font-heading: 'VT323', monospace; 
     --font-body: 'Orbitron', sans-serif; 
 
-    /* Sombras e Animações (Novo: Centraliza o efeito de sombra neon) */
-    --shadow-pink-s: 0 0 5px var(--color-neon-pink), 0 0 10px rgba(255, 0, 255, 0.4);
-    --shadow-cyan-m: 0 0 8px var(--color-neon-cyan), 0 0 20px rgba(0, 255, 255, 0.4);
-    --shadow-red-m: 0 0 8px var(--color-neon-red), 0 0 20px rgba(255, 51, 102, 0.4);
+    /* Sombras e Animações (Aprimoradas: Foco em glow sutil) */
+    --shadow-pink: 0 0 7px var(--color-neon-pink), 0 0 15px rgba(255, 0, 255, 0.5);
+    --shadow-cyan: 0 0 6px var(--color-neon-cyan), 0 0 12px rgba(0, 255, 255, 0.3);
+    --shadow-green: 0 0 5px var(--color-neon-green);
+    --shadow-red: 0 0 5px var(--color-neon-red);
     
-    /* Tamanhos */
+    /* Tamanhos e Espaçamento */
     --spacing-xs: 4px;
     --spacing-sm: 8px;
     --spacing-md: 16px;
     --spacing-lg: 24px;
-    --border-radius: 4px;
+    --spacing-xl: 40px;
+    --border-radius: 6px; /* Levemente mais arredondado */
 }
 
-/* --- Reset Básico e Estilos Globais --- */
+/* =======================================================================
+   2. RESET BÁSICO E ESTILOS GLOBAIS (Refinados)
+   ======================================================================= */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -52,76 +59,77 @@ body {
     color: var(--color-text-light);
     font-family: var(--font-body);
     line-height: 1.6;
+    /* Adiciona um gradiente sutil de fundo para profundidade */
+    background-image: radial-gradient(circle at center, var(--color-bg-medium) 1%, var(--color-bg-dark) 80%);
 }
 
-/* --- Estilos para Títulos (Usando a nova variável de sombra) --- */
+/* --- Estilos para Títulos (Mais impactantes) --- */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: var(--spacing-md); /* Usa variável */
-    /* Aplica a sombra centralizada */
-    text-shadow: var(--shadow-pink-s); 
+    letter-spacing: 3px; /* Aumenta o espaçamento */
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-neon-pink);
+    /* Foco na sombra principal e profunda */
+    text-shadow: var(--shadow-pink); 
 }
 
-h1 { font-size: 3em; }
-h2 { font-size: 2.2em; }
-h3 { font-size: 1.7em; }
+h1 { font-size: 3.5em; } /* Mais destaque */
+h2 { font-size: 2.5em; } 
+h3 { font-size: 1.8em; }
 
-/* --- Estilo Base de Links (Refinado) --- */
+/* --- Estilo Base de Links (Limpo e Profissional) --- */
 a {
     color: var(--color-neon-cyan);
     text-decoration: none;
     transition: color 0.3s ease, text-shadow 0.3s ease;
-    text-shadow: 0 0 3px var(--color-neon-cyan);
+    text-shadow: 0 0 2px var(--color-neon-cyan); /* Sombra mais sutil por padrão */
 }
 
 a:hover {
     color: var(--color-text-light);
-    /* Neon mais intenso no hover */
     text-shadow: 0 0 10px var(--color-neon-cyan); 
 }
 
-/* --- Botão Neon Base (Otimizado) --- */
+/* --- Botão Neon Base (Estilo de Botão de Terminal) --- */
 .neon-button {
-    background: none;
+    background: rgba(0, 0, 0, 0.2); /* Fundo sutil */
     border: 1px solid var(--color-neon-cyan);
     color: var(--color-neon-cyan);
-    padding: var(--spacing-sm) var(--spacing-lg); /* Usa variáveis de padding */
-    font-family: var(--font-heading);
-    font-size: 1em;
+    padding: 10px 20px;
+    font-family: var(--font-body); /* Usando corpo para botões, parece mais moderno */
+    font-weight: 700;
+    font-size: 0.95em;
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 0 5px var(--color-neon-cyan); 
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.5); /* Sombra inicial mais suave */
     border-radius: var(--border-radius); 
-    text-shadow: 0 0 3px var(--color-neon-cyan);
 }
 
-.neon-button:hover {
+.neon-button:hover:not(:disabled) {
     background-color: var(--color-neon-cyan);
     color: var(--color-bg-dark); 
-    /* Brilho mais intenso ao hover (como uma "luz acendendo") */
-    box-shadow: 0 0 15px var(--color-neon-cyan), 0 0 25px rgba(0, 255, 255, 0.6); 
-    text-shadow: none; 
+    /* Efeito de "power on" */
+    box-shadow: 0 0 20px var(--color-neon-cyan), 0 0 30px rgba(0, 255, 255, 0.8); 
+    transform: translateY(-2px);
 }
 
 .neon-button:disabled {
-    border-color: #555;
-    color: #888;
+    border-color: var(--color-text-darker);
+    color: var(--color-text-darker);
     box-shadow: none;
     cursor: not-allowed;
-    opacity: 0.5; /* Mais sutil que 0.6 */
-    background-color: #333;
+    opacity: 0.5;
+    background-color: var(--color-bg-medium);
+    transform: none;
 }
 .neon-button:disabled:hover {
-    background-color: #333;
-    box-shadow: none;
-    text-shadow: none;
+    background-color: var(--color-bg-medium);
 }
 
-/* --- Container Principal de Conteúdo (Estrutura mantida) --- */
+/* --- Container Principal de Conteúdo --- */
 .app-container {
     display: flex;
     flex-direction: column;
@@ -132,63 +140,60 @@ a:hover {
     flex-grow: 1;
     max-width: 1400px; 
     margin: 0 auto; 
-    padding: 20px;
+    padding: var(--spacing-xl) var(--spacing-md); /* Mais padding vertical */
 }
 
-/* --- Estilos para Mensagens de Feedback (Usando variáveis de sombra) --- */
+/* --- Estilos para Mensagens de Feedback (Mais contrastantes) --- */
 .feedback-message {
     padding: var(--spacing-sm) var(--spacing-lg);
-    margin-bottom: var(--spacing-lg);
+    margin: var(--spacing-lg) auto; /* Centraliza */
     border-radius: var(--border-radius);
-    font-weight: bold;
+    font-weight: 700;
     text-align: center;
     font-family: var(--font-body);
-    font-size: 1.1em;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
+    font-size: 1.05em;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 .feedback-message.success {
-    background-color: rgba(57, 255, 20, 0.15); /* Usa o novo neon green */
+    background-color: rgba(57, 255, 20, 0.1); 
     color: var(--color-neon-green);
     border: 1px solid var(--color-neon-green);
-    text-shadow: 0 0 5px var(--color-neon-green);
+    text-shadow: var(--shadow-green);
 }
 .feedback-message.error {
-    background-color: rgba(255, 51, 102, 0.15); /* Usa o novo neon red */
+    background-color: rgba(255, 51, 102, 0.1); 
     color: var(--color-neon-red);
     border: 1px solid var(--color-neon-red);
-    text-shadow: 0 0 5px var(--color-neon-red);
+    text-shadow: var(--shadow-red);
 }
 
-/* --- Estilos de Loading/Erro/Vazio (Usando variáveis de sombra) --- */
+/* --- Estilos de Loading/Erro/Vazio (VT323 para impacto) --- */
 .loading-text, .error-text, .empty-state-message {
     text-align: center;
-    margin: 60px auto;
+    margin: 80px auto; /* Mais espaçamento */
     font-family: var(--font-heading);
-    font-size: 1.8em;
-    letter-spacing: 3px;
+    font-size: 2.2em;
+    letter-spacing: 4px;
     text-transform: uppercase;
 }
 
 .loading-text {
     color: var(--color-neon-cyan);
-    /* Usa a variável de sombra */
-    text-shadow: var(--shadow-cyan-m); 
+    text-shadow: var(--shadow-cyan); 
     animation: pulse-glow 1.5s infinite alternate;
 }
 .error-text {
     color: var(--color-neon-red);
-    /* Usa a variável de sombra */
-    text-shadow: var(--shadow-red-m); 
+    text-shadow: var(--shadow-red); 
 }
 .empty-state-message {
     color: var(--color-text-medium);
-    text-shadow: 0 0 3px var(--color-text-medium);
+    text-shadow: 0 0 2px var(--color-text-medium);
 }
 
 @keyframes pulse-glow {
-    /* Mantido o efeito sutil e profissional */
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.02); opacity: 0.8; }
-    100% { transform: scale(1); opacity: 1; }
+    0% { transform: scale(1); opacity: 0.9; }
+    100% { transform: scale(1.01); opacity: 1; }
 }

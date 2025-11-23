@@ -1,155 +1,173 @@
-/* src/styles/Formulario.css (Estilo Retro Neon para Formulários) */
+/* src/styles/Formulario.css (Estilo Data Entry Profissional) */
 
-/* Importante: Replicar variáveis se não estiverem em um arquivo global */
+/* * NOTA: As variáveis de cores e fontes são importadas do global.css 
+ * (ex: --color-bg-dark, --color-neon-pink, --font-heading, --font-body)
+ * As variáveis abaixo são específicas se houver necessidade de override.
+ */
 :root {
-    --color-bg-deep: #000D1A;
-    --color-text-primary: #E0E0E0;
-    --color-neon-pink: #FF00FF;
-    --color-neon-cyan: #00FFFF;
-    --color-neon-green: #39FF14;
-    --font-display: 'Press Start 2P', monospace;
-    --font-body: 'Space Mono', monospace;
+    --color-form-bg: #110520; /* Um fundo escuro, mas não preto total */
+    --color-form-border: var(--color-neon-cyan);
+    --color-input-bg: #03000b;
+    --spacing-lg: 24px; /* Variável global replicada para segurança */
+    --spacing-xl: 40px;
 }
 
 .form-container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-    font-family: var(--font-body); /* Corpo do texto em Space Mono */
+    max-width: 650px; /* Levemente mais largo */
+    margin: var(--spacing-xl) auto;
+    padding: 0 var(--spacing-md);
+    font-family: var(--font-body);
 }
 
-/* Título Arcade Neon (Usando o estilo do Home.css: Press Start 2P e Glitch) */
+/* Título Arcade Neon (Usando o estilo do global.css, mas customizado para a página) */
 .main-title.form-arcade-title {
-    font-family: var(--font-display); 
-    font-size: clamp(1.8em, 4vw, 2.8em); /* Levemente menor que o título da Home */
+    font-family: var(--font-heading); /* VT323 */
+    font-size: clamp(2em, 5vw, 3.5em); 
     text-align: center;
-    margin-bottom: 30px; 
-    color: var(--color-neon-cyan);
-    letter-spacing: 2px;
-    text-shadow:
-        0 0 8px var(--color-neon-cyan),
-        0 0 15px var(--color-neon-cyan),
-        2px 2px 0px var(--color-neon-pink); /* Usa Pink como deslocamento */
-    animation: neon-glitch 1.5s infinite alternate; /* Mantém a animação de glitch da Home */
+    margin-bottom: var(--spacing-xl); 
+    color: var(--color-neon-pink);
+    letter-spacing: 3px;
+    /* Usa a sombra do global.css, apenas aprimorando o contraste */
+    text-shadow: 
+        0 0 10px var(--color-neon-pink),
+        0 0 20px rgba(255, 0, 255, 0.5),
+        -2px -2px 0 var(--color-neon-cyan); /* Pink com deslocamento Cyan sutil */
+    /* Removido o Glitch se for um formulário de submissão importante */
 }
 
-/* Animação do Glitch (Deve estar em algum lugar global, mas replicada aqui para contexto) */
-/*
-@keyframes neon-glitch {
-    0% { transform: translate(0); text-shadow: 0 0 10px var(--color-neon-cyan), 0 0 20px var(--color-neon-cyan), 3px 3px 0 var(--color-neon-pink); }
-    100% { transform: translate(0.5px, -0.5px); text-shadow: 0 0 15px var(--color-neon-cyan), 0 0 25px var(--color-neon-cyan), -3px -3px 0 var(--color-neon-green); }
-}
-*/
-
-/* Container do Formulário */
+/* Container do Formulário: Limpo, com Borda Dupla Sutil */
 .neon-form {
-    background-color: rgba(20, 0, 40, 0.7); /* Fundo escuro */
-    border: 1px solid var(--color-neon-pink); /* Borda em Pink */
-    padding: 30px;
+    background-color: var(--color-form-bg); 
+    border: 1px solid var(--color-form-border); /* Borda primária Cyan */
+    border-radius: 8px; /* Mais suave */
+    padding: 40px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4), inset 0 0 5px rgba(0, 255, 255, 0.1);
+    position: relative;
+    /* Linhas de grade/estrutura internas (opcional, mas profissional) */
+    background-image: linear-gradient(0deg, transparent 98%, rgba(0, 255, 255, 0.1) 100%);
+    background-size: 100% 25px; /* Altura da linha de grade */
+}
+
+.neon-form::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 1px dashed var(--color-neon-pink); /* Borda tracejada interna */
     border-radius: 10px;
-    box-shadow: 0 0 15px var(--color-neon-pink);
-    /* Removido flicker para evitar distração excessiva no formulário */
+    opacity: 0.3;
+    pointer-events: none;
 }
 
 .neon-label {
-    display: block;
-    margin-bottom: 25px; /* Mais espaço para legibilidade */
-    font-weight: bold;
-    color: var(--color-neon-green); /* Rótulo em Verde Neon */
-    text-shadow: 0 0 5px var(--color-neon-green);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing-lg); 
+    font-weight: 700;
+    font-size: 1.1em;
+    color: var(--color-neon-pink); /* Rótulo em Pink Neon para comando */
+    text-shadow: 0 0 3px var(--color-neon-pink);
     font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* Estilo dos Inputs (Texto, Textarea, Select) */
+/* Estilo dos Inputs (Texto, Textarea, Select) - Terminal Style */
 .neon-input {
     width: 100%;
-    padding: 12px;
-    margin-top: 8px;
-    background-color: #0d0d1e; /* Fundo do input */
-    color: var(--color-text-primary); /* Texto do input claro */
-    border: 1px solid var(--color-neon-cyan);
-    border-radius: 4px;
-    box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.4); /* Sombra interna para profundidade */
-    transition: all 0.3s;
+    padding: 14px 12px; /* Mais padding para altura */
+    margin-top: 10px;
+    background-color: var(--color-input-bg); 
+    color: var(--color-neon-green); /* A cor de digitação: Verde! */
+    border: 1px solid #333; /* Borda padrão escura */
+    border-radius: 2px; /* Mais quadrado, mais terminal */
+    box-shadow: inset 0 0 4px rgba(57, 255, 20, 0.2); 
+    transition: all 0.2s ease-in-out;
     font-size: 1em;
-    font-family: var(--font-body);
+    font-family: var(--font-heading); /* VT323 para a digitação/entrada de dados */
+    letter-spacing: 1px;
 }
 
 .neon-input:focus {
     outline: none;
-    border-color: var(--color-neon-pink); /* Foco em Pink */
-    box-shadow: 0 0 8px var(--color-neon-pink), 0 0 15px rgba(255, 0, 255, 0.4);
-    background-color: #1a012e; /* Levemente mais claro no foco */
+    border-color: var(--color-neon-cyan); /* Foco em Cyan */
+    box-shadow: 0 0 10px var(--color-neon-cyan), inset 0 0 8px rgba(0, 255, 255, 0.4);
+    background-color: #060210; 
+    color: var(--color-text-light); /* Cor do texto pode mudar no foco */
 }
 
 .textarea-neon {
     resize: vertical;
-    min-height: 100px;
+    min-height: 120px;
 }
 
 .select-neon {
     appearance: none; 
-    /* Seta customizada em ciano neon */
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%2300FFFF%22%20d%3D%22M6%209L0%203h12z%22%2F%3E%3C%2Fsvg%3E");
+    /* Estilo de seta mais sutil */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%2300FFFF%22%20d%3D%22M6%209L0%203h12z%22%2F%3E%3C%2Fsvg%3E");
     background-repeat: no-repeat;
-    background-position: right 15px center; /* Ajusta a posição da seta */
+    background-position: right 15px center; 
     padding-right: 40px;
 }
 
-/* Estilo do botão de submissão (Usando a classe global .neon-button + modificador) */
+/* Estilo do botão de submissão (Usando a classe global .neon-button) */
 .neon-button.btn-submit-green { 
-    /* Estilo do botão base já vem do global.css */
+    /* Usa a cor Green definida no global.css */
     border-color: var(--color-neon-green); 
-    box-shadow: 0 0 10px var(--color-neon-green); 
+    box-shadow: var(--shadow-green); /* Sombra mais limpa do global */
     color: var(--color-neon-green);
-    margin-top: 20px;
+    margin-top: var(--spacing-lg);
     width: 100%;
     font-family: var(--font-body);
     font-weight: 700;
 }
 .neon-button.btn-submit-green:hover { 
+    /* Efeito de hover do global.css já deve lidar com a cor de fundo */
     background-color: var(--color-neon-green); 
-    color: var(--color-bg-deep); /* Inverte a cor de texto */
-    box-shadow: 0 0 20px var(--color-neon-green);
+    color: var(--color-bg-dark); 
+    box-shadow: 0 0 20px var(--color-neon-green), 0 0 30px rgba(57, 255, 20, 0.6);
 }
 
-/* Botão de Cancelar/Voltar */
-.back-to-home {
-    margin-top: 20px;
+/* Botão de Cancelar/Voltar (Refinado) */
+.neon-button.btn-cancel-default {
+    margin-top: var(--spacing-sm);
     width: 100%;
-    background: none;
-    border: 1px solid #555;
-    color: #999;
-    padding: 10px;
-    text-align: center;
+    border-color: var(--color-text-medium);
+    color: var(--color-text-medium);
+    box-shadow: none;
+    transition: all 0.3s ease;
     font-family: var(--font-body);
 }
 
-.back-to-home:hover {
+.neon-button.btn-cancel-default:hover {
     color: var(--color-neon-cyan);
     border-color: var(--color-neon-cyan);
     box-shadow: 0 0 10px var(--color-neon-cyan);
     background-color: rgba(0, 255, 255, 0.1);
 }
 
-/* Estilos de Feedback (Mantidos do seu código) */
+/* Estilos de Feedback (Ajustados para consistência) */
+/* Se você estiver usando o global.css, você não precisa disso aqui. */
 .feedback-message {
     padding: 15px;
     margin-bottom: 20px;
-    border-radius: 8px;
+    border-radius: 4px;
     font-weight: bold;
     text-align: center;
     font-family: var(--font-body);
+    font-size: 1em;
 }
 .feedback-message.success {
-    background-color: rgba(57, 255, 20, 0.15);
+    background-color: rgba(57, 255, 20, 0.1);
     color: var(--color-neon-green);
     border: 1px solid var(--color-neon-green);
-    text-shadow: 0 0 5px var(--color-neon-green);
+    text-shadow: 0 0 3px var(--color-neon-green);
 }
 .feedback-message.error {
-    background-color: rgba(255, 0, 0, 0.15);
-    color: #ff4d4d;
-    border: 1px solid #ff4d4d;
-    text-shadow: 0 0 5px #ff4d4d;
+    background-color: rgba(255, 51, 102, 0.1);
+    color: var(--color-neon-red);
+    border: 1px solid var(--color-neon-red);
+    text-shadow: 0 0 3px var(--color-neon-red);
 }

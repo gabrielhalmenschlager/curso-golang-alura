@@ -1,4 +1,3 @@
-// src/components/CardJogo.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/CardJogo.css';
@@ -44,7 +43,6 @@ const CardJogo = ({ jogo }) => {
         >
             <div className="pulse-indicator" aria-hidden="true"></div>
 
-            {/* Imagem (Mantida) */}
             {jogo.imagem_url && (
                 <img
                     src={jogo.imagem_url}
@@ -59,19 +57,16 @@ const CardJogo = ({ jogo }) => {
                 <span className="card-status">{statusText}</span>
             </header>
 
-            {/* Descrição (Mantida) */}
             <p className="card-description">
                 {jogo.descricao || 'Descrição não disponível.'}
             </p>
 
             <footer className="card-footer">
                 <div className="card-category">
-                    {/* Estilo retro: Categoria como um rótulo do console */}
                     <span className="category-value">{jogo.categoria}</span>
                 </div>
 
                 <div className="card-action-hint">
-                    {/* Ícone sutil no hint para reforçar ação */}
                     Detalhes...
                 </div>
             </footer>

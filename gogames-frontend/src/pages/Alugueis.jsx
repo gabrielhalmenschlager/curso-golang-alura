@@ -1,15 +1,13 @@
-// src/pages/Alugueis.jsx (Versão COMPLETA e CORRIGIDA)
-
 import React, { useState, useEffect } from 'react';
 import { listarAlugueis, listarAlugueisAtivos, listarAlugueisInativos, devolverJogo } from '../services/alugueisService';
-import { RefreshCw } from 'lucide-react'; // Ícone de recarregar (Verifique se 'lucide-react' está instalado!)
+import { RefreshCw } from 'lucide-react'; 
 import '../styles/Alugueis.css';
 
 const Alugueis = () => {
     const [alugueis, setAlugueis] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [filter, setFilter] = useState('TODOS'); // TODOS, ALUGADO, DEVOLVIDO
+    const [filter, setFilter] = useState('TODOS');
     const [message, setMessage] = useState('');
 
     const fetchAlugueis = async (currentFilter) => {
@@ -17,26 +15,20 @@ const Alugueis = () => {
         setError(null);
         setMessage('');
 
-        let serviceCall;
-        if (currentFilter === 'ALUGADO') {
-            serviceCall = listarAlugueisAtivos;
-        } else if (currentFilter === 'DEVOLVIDO') {
-            serviceCall = listarAlugueisInativos;
-        } else {
-            serviceCall = listarAlugueis;
-        }
+        let serviceCall = listarAlugueis;
+        if (currentFilter === 'ALUGADO') serviceCall = listarAlugueisAtivos;
+        if (currentFilter === 'DEVOLVIDO') serviceCall = listarAlugueisInativos;
 
         try {
             const data = await serviceCall();
             setAlugueis(data);
         } catch (err) {
             console.error('Erro ao carregar aluguéis:', err);
-            // Verifica se a API está inacessível
-            const errorMessage = err.message.includes('Network Error') 
-                ? '⚠️ API Indisponível. Não foi possível carregar os dados.'
-                : '❌ Não foi possível carregar os dados de aluguéis.';
+            const errorMessage = err.message.includes('Network Error')
+                ? '⚠️ API indisponível. Não foi possível carregar os dados.'
+                : '❌ Erro no processamento dos dados. Verifique a API.';
             setError(errorMessage);
-            setAlugueis([]); // Limpa a lista em caso de erro
+            setAlugueis([]);
         } finally {
             setLoading(false);
         }
@@ -47,58 +39,51 @@ const Alugueis = () => {
     }, [filter]);
 
     const handleDevolucao = async (aluguelID) => {
-        if (!window.confirm("Confirma a devolução deste aluguel?")) {
-            return;
-        }
+        if (!window.confirm("Confirma a devolução deste aluguel?")) return;
 
         try {
             await devolverJogo(aluguelID);
-            setMessage(`✅ Aluguel #${aluguelID} devolvido com sucesso!`);
-            // Recarrega a lista para atualizar o status e remover do filtro 'ALUGADO'
-            fetchAlugueis(filter); 
+            setMessage(`✅ Aluguel #${aluguelID} devolvido com sucesso.`);
+            fetchAlugueis(filter);
         } catch (error) {
-            console.error('Erro ao devolver:', error.response ? error.response.data.erro : error.message);
-            setMessage(`❌ Erro na devolução: ${error.response ? error.response.data.erro : 'Falha na conexão'}`);
+            console.error('Erro na devolução:', error.response ? error.response.data.erro : error.message);
+            setMessage(`❌ Erro na devolução: ${error.response?.data?.erro || 'Falha na conexão'}`);
         }
     };
 
     const formatDate = (dateStr) => {
-        if (!dateStr) return 'N/A';
-        return new Date(dateStr).toLocaleDateString('pt-BR');
+        return dateStr ? new Date(dateStr).toLocaleDateString('pt-BR') : 'N/A';
     }
 
     return (
         <div className="alugueis-container">
-            {/* Título com estilo Press Start 2P e Glitch/Neon Pink */}
-            <h1 className="main-title alugueis-arcade-title">ALUGUÉIS DA GO GAMES</h1>
-            
+            <h1 className="main-title alugueis-arcade-title">Registro de Aluguéis</h1>
+
             {message && (
                 <p className={`feedback-message ${message.includes('Erro') || message.includes('❌') ? 'error' : 'success'}`}>
                     {message}
                 </p>
             )}
 
-            {/* Componente de Filtro (Abas) */}
             <div className="filter-tabs">
                 <button 
                     onClick={() => setFilter('TODOS')}
                     className={`neon-tab ${filter === 'TODOS' ? 'active-cyan' : ''}`}
                 >
-                    TODOS ({alugueis.length})
+                    Todos
                 </button>
                 <button 
                     onClick={() => setFilter('ALUGADO')}
                     className={`neon-tab ${filter === 'ALUGADO' ? 'active-red' : ''}`}
                 >
-                    ATIVOS
+                    Ativos
                 </button>
                 <button 
                     onClick={() => setFilter('DEVOLVIDO')}
                     className={`neon-tab ${filter === 'DEVOLVIDO' ? 'active-green' : ''}`}
                 >
-                    INATIVOS
+                    Inativos
                 </button>
-                {/* Botão de recarregar para UX */}
                 <button 
                     onClick={() => fetchAlugueis(filter)}
                     className="neon-tab refresh-button"
@@ -109,23 +94,22 @@ const Alugueis = () => {
             </div>
 
             {loading ? (
-                <h2 className="loading-text">CARREGANDO REGISTROS...</h2>
+                <h2 className="loading-text">Carregando registros...</h2>
             ) : error ? (
                 <h2 className="error-text">{error}</h2>
             ) : alugueis.length === 0 ? (
-                <p className="neon-message">Nenhum aluguel encontrado no filtro **{filter}**.</p>
+                <p className="neon-message">Nenhum registro encontrado para o filtro "{filter}".</p>
             ) : (
-                /* Tabela de Aluguéis */
                 <div className="alugueis-table-wrapper">
                     <table className="neon-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>JOGO</th>
-                                <th>DATA ALUGUEL</th>
-                                <th>DEVOL. PREVISTA</th>
-                                <th>STATUS</th>
-                                <th>AÇÕES / DATA REAL</th>
+                                <th>Jogo</th>
+                                <th>Data de Aluguel</th>
+                                <th>Devolução Prevista</th>
+                                <th>Status</th>
+                                <th>Ações / Data Real</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -146,7 +130,7 @@ const Alugueis = () => {
                                                 className="neon-button-small btn-devolver"
                                                 onClick={() => handleDevolucao(item.id)}
                                             >
-                                                DEVOLVER
+                                                Devolver
                                             </button>
                                         ) : (
                                             <span className="devolvido-date">{formatDate(item.data_devolucao_real)}</span>
