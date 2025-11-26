@@ -20,8 +20,23 @@ func GetPizzas(c *gin.Context) {
 }
 
 func GetPizzasByID(c *gin.Context) {
-	id := c.Params("id")
-	strconv.Atoi(id)
+	idParam := c.Param("id")
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"erro": err.Error(),
+		})
+		return
+	}
+	for _, p := range pizzas {
+		if p.ID == id {
+			c.JSON(200, p)
+			return
+		}
+	}
+	c.JSON(404, gin.H{
+		"message": "Pizza Not Found",
+	})
 }
 
 func PostPizzas(c *gin.Context) {
