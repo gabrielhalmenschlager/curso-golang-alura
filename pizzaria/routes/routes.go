@@ -8,5 +8,6 @@ import (
 func HandleRequests() {
 	router := gin.Default()
 	router.GET("/pizzas", controllers.GetPizzas)
+	router.POST("/pizzas", controllers.PostPizzas)
 	router.Run()
 }
