@@ -44,7 +44,7 @@ func GetPizzas(c *gin.Context) {
 	})
 }
 
-func GetPizzasByID(c *gin.Context) {
+func GetPizzaByID(c *gin.Context) {
 	idParam := c.Param("id")
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
@@ -64,7 +64,7 @@ func GetPizzasByID(c *gin.Context) {
 	})
 }
 
-func PostPizzas(c *gin.Context) {
+func PostPizza(c *gin.Context) {
 	var newPizza models.Pizza
 	if err := c.ShouldBindJSON(&newPizza); err != nil {
 		c.JSON(400, gin.H{
@@ -76,4 +76,12 @@ func PostPizzas(c *gin.Context) {
 	pizzas = append(pizzas, newPizza)
 	SavePizza()
 	c.JSON(201, newPizza)
+}
+
+func UpdatePizza(c *gin.Context) {
+	c.JSON(200, gin.H{"method": "put"})
+}
+
+func DeletePizzaByID(c *gin.Context) {
+	c.JSON(200, gin.H{"method": "delete"})
 }

@@ -9,7 +9,9 @@ func HandleRequests() {
 	controllers.LoadPizzas()
 	router := gin.Default()
 	router.GET("/pizzas", controllers.GetPizzas)
-	router.GET("/pizzas/:id", controllers.GetPizzasByID)
-	router.POST("/pizzas", controllers.PostPizzas)
+	router.GET("/pizzas/:id", controllers.GetPizzaByID)
+	router.POST("/pizzas", controllers.PostPizza)
+	router.PUT("/pizzas/:id", controllers.UpdatePizza)
+	router.DELETE("/pizzas/:id", controllers.DeletePizzaByID)
 	router.Run()
 }
