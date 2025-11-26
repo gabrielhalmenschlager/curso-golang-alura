@@ -1,16 +1,28 @@
 package controllers
 
 import (
+	"encoding/json"
+	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/gabrielhalmenschlager/curso-golang-alura/pizzaria/models"
 	"github.com/gin-gonic/gin"
 )
 
-var pizzas = []models.Pizza{
-	{ID: 1, Nome: "Toscana", Preco: 79.5},
-	{ID: 2, Nome: "Marguerita", Preco: 69.5},
-	{ID: 3, Nome: "Atum com queijo", Preco: 59.5},
+var pizzas []models.Pizza
+
+func LoadPizzas() {
+	file, err := os.Open("pizzaria/dados/pizzas.json")
+	if err != nil {
+		fmt.Println("Erro File:", err)
+		return
+	}
+	defer file.Close()
+	decoder := json.NewDecoder(file)
+	if err := decoder.Decode(&pizzas); err != nil {
+		fmt.Println("Error Decoding JSON:", err)
+	}
 }
 
 func GetPizzas(c *gin.Context) {

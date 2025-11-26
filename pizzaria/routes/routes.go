@@ -6,6 +6,7 @@ import (
 )
 
 func HandleRequests() {
+	controllers.LoadPizzas()
 	router := gin.Default()
 	router.GET("/pizzas", controllers.GetPizzas)
 	router.GET("/pizzas/:id", controllers.GetPizzasByID)
