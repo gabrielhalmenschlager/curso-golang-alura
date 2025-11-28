@@ -2,11 +2,12 @@ package routes
 
 import (
 	"github.com/gabrielhalmenschlager/curso-golang-alura/pizzaria/controllers"
+	"github.com/gabrielhalmenschlager/curso-golang-alura/pizzaria/internal/data"
 	"github.com/gin-gonic/gin"
 )
 
 func HandleRequests() {
-	controllers.LoadPizzas()
+	data.LoadPizzas()
 	router := gin.Default()
 	router.GET("/pizzas", controllers.GetPizzas)
 	router.GET("/pizzas/:id", controllers.GetPizzaByID)
