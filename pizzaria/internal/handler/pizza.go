@@ -5,6 +5,7 @@ import (
 
 	"github.com/gabrielhalmenschlager/curso-golang-alura/pizzaria/internal/data"
 	"github.com/gabrielhalmenschlager/curso-golang-alura/pizzaria/internal/models"
+	"github.com/gabrielhalmenschlager/curso-golang-alura/pizzaria/internal/service"
 	"github.com/gin-gonic/gin"
 )
 
@@ -42,6 +43,12 @@ func PostPizza(c *gin.Context) {
 		})
 		return
 	}
+	if err := service.ValidadePizzaPrice(&newPizza); err != nil {
+		c.JSON(401, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
 	newPizza.ID = len(data.Pizzas) + 1
 	data.Pizzas = append(data.Pizzas, newPizza)
 	data.SavePizza()
@@ -60,6 +67,12 @@ func UpdatePizza(c *gin.Context) {
 	var updatedPizza models.Pizza
 	if err := c.ShouldBindJSON(&updatedPizza); err != nil {
 		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	if err := service.ValidadePizzaPrice(&updatedPizza); err != nil {
+		c.JSON(401, gin.H{
 			"error": err.Error(),
 		})
 		return
