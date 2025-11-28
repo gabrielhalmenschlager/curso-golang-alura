@@ -87,6 +87,34 @@ func UpdatePizza(c *gin.Context) {
 		})
 		return
 	}
+	var updatedPizza models.Pizza
+	if err := c.ShouldBindJSON(&updatedPizza); err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	for i, p := range pizzas {
+		if p.ID == id {
+			pizzas[i] = updatedPizza
+			pizzas[i].ID = id
+			SavePizza()
+			c.JSON(200, pizzas[i])
+			return
+		}
+	}
+	c.JSON(404, gin.H{"message": "Pizza Not Found"})
+}
+
+func DeletePizzaByID(c *gin.Context) {
+	idParam := c.Param("id")
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
 	for i, p := range pizzas {
 		if p.ID == id {
 			pizzas = append(pizzas[:i], pizzas[i+1:]...)
@@ -95,8 +123,4 @@ func UpdatePizza(c *gin.Context) {
 		}
 	}
 	c.JSON(404, gin.H{"message": "Pizza Not Found"})
-}
-
-func DeletePizzaByID(c *gin.Context) {
-	c.JSON(200, gin.H{"method": "delete"})
 }
