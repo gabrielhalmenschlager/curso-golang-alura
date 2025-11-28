@@ -1,15 +1,16 @@
-package controllers
+package handler
 
 import (
 	"strconv"
 
-	"github.com/gabrielhalmenschlager/curso-golang-alura/pizzaria/models"
+	"github.com/gabrielhalmenschlager/curso-golang-alura/pizzaria/internal/data"
+	"github.com/gabrielhalmenschlager/curso-golang-alura/pizzaria/internal/models"
 	"github.com/gin-gonic/gin"
 )
 
 func GetPizzas(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"pizzas": pizzas,
+		"pizzas": data.Pizzas,
 	})
 }
 
@@ -22,7 +23,7 @@ func GetPizzaByID(c *gin.Context) {
 		})
 		return
 	}
-	for _, p := range pizzas {
+	for _, p := range data.Pizzas {
 		if p.ID == id {
 			c.JSON(200, p)
 			return
@@ -41,9 +42,9 @@ func PostPizza(c *gin.Context) {
 		})
 		return
 	}
-	newPizza.ID = len(pizzas) + 1
-	pizzas = append(pizzas, newPizza)
-	SavePizza()
+	newPizza.ID = len(data.Pizzas) + 1
+	data.Pizzas = append(data.Pizzas, newPizza)
+	data.SavePizza()
 	c.JSON(201, newPizza)
 }
 
@@ -63,12 +64,12 @@ func UpdatePizza(c *gin.Context) {
 		})
 		return
 	}
-	for i, p := range pizzas {
+	for i, p := range data.Pizzas {
 		if p.ID == id {
-			pizzas[i] = updatedPizza
-			pizzas[i].ID = id
-			SavePizza()
-			c.JSON(200, pizzas[i])
+			data.Pizzas[i] = updatedPizza
+			data.Pizzas[i].ID = id
+			data.SavePizza()
+			c.JSON(200, data.Pizzas[i])
 			return
 		}
 	}
@@ -84,10 +85,10 @@ func DeletePizzaByID(c *gin.Context) {
 		})
 		return
 	}
-	for i, p := range pizzas {
+	for i, p := range data.Pizzas {
 		if p.ID == id {
-			pizzas = append(pizzas[:i], pizzas[i+1:]...)
-			SavePizza()
+			data.Pizzas = append(data.Pizzas[:i], data.Pizzas[i+1:]...)
+			data.SavePizza()
 			c.JSON(200, gin.H{"message": "Pizza Deleted"})
 		}
 	}
