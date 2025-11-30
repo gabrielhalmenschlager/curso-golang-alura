@@ -6,23 +6,19 @@ import (
 	"time"
 
 	"github.com/gabrielhalmenschlager/curso-golang-alura/buscador/internal/fetcher"
+	"github.com/gabrielhalmenschlager/curso-golang-alura/buscador/internal/processor"
 )
 
 func main() {
 	start := time.Now()
 	priceChannel := make(chan float64)
-	var wg sync.WaitGroup
+	var wg, showWg sync.WaitGroup
 	wg.Add(3)
+	showWg.Add(1)
 
 	go func() {
-		var totalPrice float64
-		countPrices := 0.0
-		for price := range priceChannel {
-			totalPrice += price
-			countPrices++
-			avgPrice := totalPrice / countPrices
-			fmt.Printf("Preço recebido: R$ %.2f | Preço até agora: R$ %.2f \n", price, avgPrice)
-		}
+		defer showWg.Done()
+		processor.ShowPriceAVG(priceChannel)
 	}()
 
 	go func() {
@@ -42,6 +38,7 @@ func main() {
 
 	wg.Wait()
 	close(priceChannel)
+	showWg.Wait()
 
 	fmt.Printf("\nTempo total: %s", time.Since(start))
 }
