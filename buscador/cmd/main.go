@@ -12,8 +12,7 @@ import (
 func main() {
 	start := time.Now()
 	priceChannel := make(chan float64)
-	var wg, showWg sync.WaitGroup
-	wg.Add(3)
+	var showWg sync.WaitGroup
 	showWg.Add(1)
 
 	go func() {
@@ -21,23 +20,8 @@ func main() {
 		processor.ShowPriceAVG(priceChannel)
 	}()
 
-	go func() {
-		defer wg.Done()
-		priceChannel <- fetcher.FetchPriceFromSite1()
-	}()
+	go fetcher.FetchPrices(priceChannel)
 
-	go func() {
-		defer wg.Done()
-		priceChannel <- fetcher.FetchPriceFromSite2()
-	}()
-
-	go func() {
-		defer wg.Done()
-		priceChannel <- fetcher.FetchPriceFromSite3()
-	}()
-
-	wg.Wait()
-	close(priceChannel)
 	showWg.Wait()
 
 	fmt.Printf("\nTempo total: %s", time.Since(start))
