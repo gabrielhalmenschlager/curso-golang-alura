@@ -8,7 +8,7 @@ import (
 
 func FetchPrices(priceChannel chan<- float64) {
 	var wg sync.WaitGroup
-	wg.Add(3)
+	wg.Add(4)
 
 	go func() {
 		defer wg.Done()
@@ -26,6 +26,7 @@ func FetchPrices(priceChannel chan<- float64) {
 	}()
 
 	go func() {
+		defer wg.Done()
 		FetchAndSendMultiplePrices(priceChannel)
 	}()
 
