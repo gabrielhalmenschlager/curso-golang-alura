@@ -53,3 +53,11 @@ func (e *Estoque) ListItens() []models.Item {
 func (e *Estoque) ViewAuditLog() []models.Log {
 	return e.logs
 }
+
+func (e *Estoque) CalculateTotalCost() float64 {
+	var totalCost float64
+	for _, item := range e.items {
+		totalCost += float64(item.Quantity) * item.Price
+	}
+	return totalCost
+}

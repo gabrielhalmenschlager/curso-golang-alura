@@ -28,6 +28,10 @@ func main() {
 
 	fmt.Println()
 
+	fmt.Printf("\nValor total do estoque: R$ %.2f", estoque.CalculateTotalCost())
+
+	fmt.Println()
+
 	logs := estoque.ViewAuditLog()
 	for _, log := range logs {
 		fmt.Printf("\n[%s] Ação: %s - Usuário: %s - Item ID: %d - Quantidade: %d - Motivo: %s", log.Timestamp.Format("01/02 15:04:05"), log.Action, log.User, log.ItemID, log.Quantity, log.Reason)
