@@ -2,8 +2,17 @@ package services
 
 import "fmt"
 
-type FornecedorService interface {
+type InfoService interface {
 	GetInfo() string
+}
+
+type Disponibilidade interface {
+	VerificarDisponibilidade(quantidadeSolicitada int, quantidadeDisponivel int) bool
+}
+
+type FornecedorService interface {
+	InfoService
+	Disponibilidade
 }
 
 type Fornecedor struct {
@@ -14,4 +23,8 @@ type Fornecedor struct {
 
 func (f Fornecedor) GetInfo() string {
 	return fmt.Sprintf("CNPJ: %s | Contato: %s | Cidade: %s", f.CNPJ, f.Contato, f.Cidade)
+}
+
+func (f Fornecedor) VerificarDisponibilidade(quantidadeSolicitada int, quantidadeDisponivel int) bool {
+	return quantidadeSolicitada <= quantidadeDisponivel
 }

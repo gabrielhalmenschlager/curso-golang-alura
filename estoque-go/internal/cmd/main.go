@@ -59,4 +59,10 @@ func main() {
 	fmt.Println()
 
 	fmt.Println(alura.GetInfo())
+
+	if alura.VerificarDisponibilidade(10, 15) {
+		fmt.Println("\nPossui disponibilidade")
+	} else {
+		fmt.Println("\nNão possui disponibilidade")
+	}
 }
