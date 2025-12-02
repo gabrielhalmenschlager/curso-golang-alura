@@ -8,7 +8,9 @@ import (
 )
 
 func main() {
+	fmt.Println("==============================")
 	fmt.Println("===== Sistema de Estoque =====")
+	fmt.Println("==============================")
 	estoque := services.NewEstoque()
 	itens := []models.Item{
 		{ID: 1, Name: "Item 1", Quantity: 5, Price: 19.99},
@@ -46,5 +48,15 @@ func main() {
 
 	fmt.Println()
 
-	fmt.Println("Item encontrado: ", itemParaBuscar)
+	fmt.Println("\nItem encontrado: ", itemParaBuscar)
+
+	alura := services.Fornecedor{
+		CNPJ:    "123456",
+		Contato: "11970707070",
+		Cidade:  "São Paulo",
+	}
+
+	fmt.Println()
+
+	fmt.Println(alura.GetInfo())
 }
