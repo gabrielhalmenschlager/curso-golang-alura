@@ -8,3 +8,7 @@ type Item struct {
 	Preco      float64 `json:"preco"`
 	Quantidade int     `json:"quantidade"`
 }
+
+func (Item) TableName() string {
+	return "itens"
+}

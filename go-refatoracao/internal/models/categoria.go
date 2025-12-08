@@ -6,3 +6,7 @@ type Categoria struct {
 	Codigo    string `gorm:"unique" json:"codigo"`
 	Descricao string `json:"descricao"`
 }
+
+func (Categoria) TableName() string {
+	return "categorias"
+}
